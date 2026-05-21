@@ -1,0 +1,14 @@
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\bin\Debug\net8.0\PascalCompiler.exe
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\bin\Debug\net8.0\PascalCompiler.deps.json
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\bin\Debug\net8.0\PascalCompiler.runtimeconfig.json
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\bin\Debug\net8.0\PascalCompiler.dll
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\bin\Debug\net8.0\PascalCompiler.pdb
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.AssemblyInfoInputs.cache
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.AssemblyInfo.cs
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.csproj.CoreCompileInputs.cache
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.dll
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\refint\PascalCompiler.dll
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.pdb
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.genruntimeconfig.cache
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\ref\PascalCompiler.dll
