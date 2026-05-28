@@ -17,55 +17,33 @@ namespace PascalCompiler.IO
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                throw new ArgumentException("Путь не может быть пустым.",
-                    nameof(filePath));
+                string msg = "Путь к файлу не может быть пустым.";
+                throw new ArgumentException(msg, nameof(filePath));
             }
 
-            this._reader = new StreamReader(filePath);
-            this._errorTable = errorTable ??
+            _reader = new StreamReader(filePath);
+            _errorTable = errorTable ??
                 throw new ArgumentNullException(nameof(errorTable));
-            this._errorGenerator = new RandomErrorGenerator();
-            this._currentLine = 1;
-            this._currentColumn = 0;
-            this._isEof = false;
+            _errorGenerator = new RandomErrorGenerator();
+
+            _currentLine = 1;
+            _currentColumn = 0;
+            _isEof = false;
         }
 
-        public int CurrentLine
-        {
-            get
-            {
-                return this._currentLine;
-            }
-        }
-
-        public int CurrentColumn
-        {
-            get
-            {
-                return this._currentColumn;
-            }
-        }
-
-        public bool IsEof
-        {
-            get
-            {
-                return this._isEof;
-            }
-        }
+        public int CurrentLine => _currentLine;
+        public int CurrentColumn => _currentColumn;
+        public bool IsEof => _isEof;
 
         public char NextCh()
         {
-            if (this._isEof)
-            {
-                return '\0';
-            }
+            if (_isEof) return '\0';
 
-            int nextCharInt = this._reader.Read();
+            int nextCharInt = _reader.Read();
 
             if (nextCharInt == -1)
             {
-                this._isEof = true;
+                _isEof = true;
                 return '\0';
             }
 
@@ -73,45 +51,35 @@ namespace PascalCompiler.IO
 
             if (ch == '\n')
             {
-                this._currentLine++;
-                this._currentColumn = 0;
+                _currentLine++;
+                _currentColumn = 0;
             }
             else if (ch != '\r')
             {
-                this._currentColumn++;
+                _currentColumn++;
             }
 
             if (ch != '\r' && ch != '\n' &&
-                this._errorGenerator.TryGetRandomError
-                (out string randomMessage, 10))
+                _errorGenerator.TryGetRandomError(out string rndMsg, 10))
             {
-                this._errorTable.AddError(this._currentLine,
-                    this._currentColumn, randomMessage);
+                _errorTable.AddError(_currentLine, _currentColumn, rndMsg);
             }
 
             return ch;
         }
 
-        public void Close()
-        {
-            this.Dispose();
-        }
-
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!_disposed)
             {
-                if (disposing)
-                {
-                    this._reader?.Dispose();
-                }
-                this._disposed = true;
+                if (disposing) _reader?.Dispose();
+                _disposed = true;
             }
         }
     }

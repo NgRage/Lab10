@@ -29,30 +29,24 @@ namespace PascalCompiler.IO
         {
             if (this._errors.Count == 0)
             {
-                Console.WriteLine("Ошибок не обнаружено.");
+                Console.WriteLine("\nОшибок не обнаружено.");
                 return;
             }
 
-            string codeLine = "";
-            string pointer = "";
             foreach (var error in this._errors)
             {
                 Console.WriteLine(error.ToString());
-
                 if (error.Line > 0 && error.Line <= sourceLines.Length)
                 {
-                    codeLine = sourceLines[error.Line - 1];
-                    Console.WriteLine(codeLine);
-
+                    Console.WriteLine(sourceLines[error.Line - 1]);
                     if (error.Column > 0)
                     {
-                        pointer = new string(' ', error.Column - 1) + "^";
-                        Console.WriteLine(pointer);
+                        Console.WriteLine(new string(' ', error.Column - 1) + "^");
                     }
                 }
-
                 Console.WriteLine();
             }
+            Console.WriteLine($"Найдено ошибок: {this._errors.Count}.");
         }
     }
 }

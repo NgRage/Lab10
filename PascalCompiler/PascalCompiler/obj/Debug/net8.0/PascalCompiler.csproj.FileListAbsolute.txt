@@ -12,3 +12,4 @@ C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\
 C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.pdb
 C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.genruntimeconfig.cache
 C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\ref\PascalCompiler.dll
+C:\Users\Rage\Desktop\ЯП\lab 10\Lab10\PascalCompiler\PascalCompiler\obj\Debug\net8.0\PascalCompiler.sourcelink.json
