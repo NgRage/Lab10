@@ -25,7 +25,7 @@ namespace PascalCompiler.Lexer
 
         public override string ToString()
         {
-            string t = _type.ToString().PadRight(12);
+            string t = _type.ToString().PadRight(14);
             string c = Code.ToString().PadRight(3);
             return $"Токен: {t} | Код: {c} | Знач.: '{_value}'";
         }

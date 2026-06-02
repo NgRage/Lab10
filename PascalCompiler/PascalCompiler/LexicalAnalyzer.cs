@@ -10,7 +10,10 @@ namespace PascalCompiler.Lexer
         private readonly InputOutputModule _io;
         private readonly ErrorTable _errorTable;
         private readonly Dictionary<string, TokenType> _keywords;
+
         private char _currentChar;
+        private char _peekChar = '\0';
+        private bool _hasPeek = false;
 
         public LexicalAnalyzer(InputOutputModule io, ErrorTable errors)
         {
@@ -26,13 +29,36 @@ namespace PascalCompiler.Lexer
                 { "var", TokenType.Var },
                 { "const", TokenType.Const },
                 { "begin", TokenType.Begin },
-                { "end", TokenType.End }
+                { "end", TokenType.End },
+                { "type", TokenType.Type },
+                { "array", TokenType.Array },
+                { "record", TokenType.Record },
+                { "of", TokenType.Of },
+                { "with", TokenType.With },
+                { "do", TokenType.Do },
+                { "if", TokenType.If },
+                { "then", TokenType.Then },
+                { "else", TokenType.Else },
+                { "while", TokenType.While },
+                { "for", TokenType.For },
+                { "to", TokenType.To },
+                { "downto", TokenType.Downto },
+                { "repeat", TokenType.Repeat },
+                { "until", TokenType.Until },
+                { "case", TokenType.Case },
+                { "procedure", TokenType.Procedure },
+                { "function", TokenType.Function },
+                { "integer", TokenType.Integer },
+                { "real", TokenType.Real },
+                { "char", TokenType.Char },
+                { "boolean", TokenType.Boolean },
+                { "string", TokenType.String }
             };
 
             Advance();
         }
 
-        public void Advance()
+        private void Advance()
         {
             if (_hasPeek)
             {
@@ -40,12 +66,12 @@ namespace PascalCompiler.Lexer
                 _hasPeek = false;
             }
             else
-        {
-            _currentChar = _io.NextCh();
-        }
+            {
+                _currentChar = _io.NextCh();
+            }
         }
 
-        public char Peek()
+        private char Peek()
         {
             if (!_hasPeek)
             {
@@ -55,7 +81,7 @@ namespace PascalCompiler.Lexer
             return _peekChar;
         }
 
-        public void SkipWhitespaceAndComments()
+        private void SkipWhitespaceAndComments()
         {
             while (true)
             {
@@ -67,8 +93,8 @@ namespace PascalCompiler.Lexer
                 {
                     int sLine = _io.CurrentLine;
                     int sCol = _io.CurrentColumn;
-                    Advance();
                     bool isClosed = false;
+                    Advance();
 
                     while (_currentChar != '\0')
                     {
@@ -82,7 +108,8 @@ namespace PascalCompiler.Lexer
                     }
                     if (!isClosed)
                     {
-                        string msg = "Незакрытый комментарий '{'";
+                        string msg = "Незакрытый " +
+                                     "комментарий '{'";
                         _errorTable.AddError(sLine, sCol, msg);
                     }
                 }
@@ -90,11 +117,12 @@ namespace PascalCompiler.Lexer
                 {
                     int sLine = _io.CurrentLine;
                     int sCol = _io.CurrentColumn;
-                    Advance();
-                    Advance();
                     bool isClosed = false;
 
-                    while (_currentChar != '\0')
+                    Advance();
+                    Advance();
+
+                    while (_currentChar != '\0' && !_io.IsEof)
                     {
                         if (_currentChar == '*' && Peek() == ')')
                         {
@@ -105,20 +133,22 @@ namespace PascalCompiler.Lexer
                         }
                         Advance();
                     }
+
                     if (!isClosed)
                     {
-                        string msg = "Незакрытый комментарий '(*'";
+                        string msg = "Незакрытый " +
+                            "комментарий '(*'";
                         _errorTable.AddError(sLine, sCol, msg);
                     }
                 }
                 else if (_currentChar == '/' && Peek() == '/')
-        {
+                {
                     Advance();
                     Advance();
                     while (_currentChar != '\n' && _currentChar != '\0')
-            {
-                Advance();
-            }
+                    {
+                        Advance();
+                    }
                 }
                 else
                 {
@@ -161,6 +191,7 @@ namespace PascalCompiler.Lexer
             if (char.IsDigit(_currentChar))
             {
                 StringBuilder sb = new StringBuilder();
+                bool isReal = false;
 
                 while (char.IsDigit(_currentChar))
                 {
@@ -168,12 +199,30 @@ namespace PascalCompiler.Lexer
                     Advance();
                 }
 
+                if ((_currentChar == '.' || _currentChar == ',') &&
+                    char.IsDigit(Peek()))
+                {
+                    isReal = true;
+                    sb.Append('.');
+                    Advance();
+
+                    while (char.IsDigit(_currentChar))
+                    {
+                        sb.Append(_currentChar);
+                        Advance();
+                    }
+                }
+
                 string numStr = sb.ToString();
 
-                if (!int.TryParse(numStr, out _))
+                if (!isReal)
                 {
-                    string msg = $"Число {numStr} вне диапазона.";
-                    _errorTable.AddError(startLine, startCol, msg);
+                    if (!int.TryParse(numStr, out _))
+                    {
+                        string msg = $"Ошибка диапазона: Число {numStr} " +
+                                     "не помещается в 32-битный Integer.";
+                        _errorTable.AddError(startLine, startCol, msg);
+                    }
                 }
 
                 return new Token(TokenType.Number, numStr,
@@ -182,9 +231,9 @@ namespace PascalCompiler.Lexer
 
             if (_currentChar == '\'')
             {
-                Advance();
                 StringBuilder sb = new StringBuilder();
                 bool isClosed = false;
+                Advance();
 
                 while (_currentChar != '\0' && _currentChar != '\n')
                 {
@@ -200,7 +249,8 @@ namespace PascalCompiler.Lexer
 
                 if (!isClosed)
                 {
-                    string msg = "Незакрытая строковая кавычка '''";
+                    string msg = "Незакрытый " +
+                                 "строковый литерал '''";
                     _errorTable.AddError(startLine, startCol, msg);
                 }
 
@@ -216,17 +266,11 @@ namespace PascalCompiler.Lexer
                 case ';':
                     return new Token(TokenType.Semicolon, ";",
                         startLine, startCol);
-                case ':':
-                    if (_currentChar == '=')
-                    {
-                        Advance();
-                        return new Token(TokenType.Assign, ":=",
-                            startLine, startCol);
-                    }
-                    return new Token(TokenType.Colon, ":",
+                case ',':
+                    return new Token(TokenType.Comma, ",",
                         startLine, startCol);
-                case '=':
-                    return new Token(TokenType.Equal, "=",
+                case '.':
+                    return new Token(TokenType.Period, ".",
                         startLine, startCol);
                 case '+':
                     return new Token(TokenType.Plus, "+",
@@ -246,8 +290,50 @@ namespace PascalCompiler.Lexer
                 case ')':
                     return new Token(TokenType.RightParen, ")",
                         startLine, startCol);
+                case '[':
+                    return new Token(TokenType.LeftBracket, "[",
+                        startLine, startCol);
+                case ']':
+                    return new Token(TokenType.RightBracket, "]",
+                        startLine, startCol);
+                case '=':
+                    return new Token(TokenType.Equal, "=",
+                        startLine, startCol);
+                case ':':
+                    if (_currentChar == '=')
+                    {
+                        Advance();
+                        return new Token(TokenType.Assign, ":=",
+                            startLine, startCol);
+                    }
+                    return new Token(TokenType.Colon, ":",
+                        startLine, startCol);
+                case '<':
+                    if (_currentChar == '=')
+                    {
+                        Advance();
+                        return new Token(TokenType.LessOrEqual, "<=",
+                            startLine, startCol);
+                    }
+                    if (_currentChar == '>')
+                    {
+                        Advance();
+                        return new Token(TokenType.NotEqual, "<>",
+                            startLine, startCol);
+                    }
+                    return new Token(TokenType.LessThan, "<",
+                        startLine, startCol);
+                case '>':
+                    if (_currentChar == '=')
+                    {
+                        Advance();
+                        return new Token(TokenType.GreaterOrEqual, ">=",
+                            startLine, startCol);
+                    }
+                    return new Token(TokenType.GreaterThan, ">",
+                        startLine, startCol);
                 default:
-                    string msg = $"Недопустимый символ: '{ch}'";
+                    string msg = $"Недопустимый лексический символ: '{ch}'";
                     _errorTable.AddError(startLine, startCol, msg);
                     return new Token(TokenType.Unknown, ch.ToString(),
                         startLine, startCol);

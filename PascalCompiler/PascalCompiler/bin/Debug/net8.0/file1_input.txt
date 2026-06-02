@@ -1,3 +1,34 @@
-program a;
-var var
-const d = 100000000000000000000000000000;
+program Test;
+
+var
+  user : record
+    id : integer;
+    weight : real;
+  end;
+  
+  x : integer;
+  d : integer;
+  s : char;
+
+begin
+  { Тут должно быть все написано правильно }
+  x := 10 + 20 * (5 - 2);
+  user.id := 1;
+  
+  with user do
+  begin
+    weight := 75.5;
+  end;
+
+  (* Здесь оишбики на лекcечкий анализатор *)
+  user.id := $100;
+  s := 'Строка не закрылась;
+  d := 99999999999999999999999;
+
+  { Здесь все, что нужно нейтрализовать }
+  x := + 5;           //Тут + после :=
+  with user x := 10;  //Тут нет do
+  x := (10 + 5 * 2;   //Тут нет скобки
+  
+  user.id := 10;
+end.

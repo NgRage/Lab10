@@ -7,7 +7,6 @@ namespace PascalCompiler.IO
     {
         private readonly StreamReader _reader;
         private readonly ErrorTable _errorTable;
-        private readonly RandomErrorGenerator _errorGenerator;
         private int _currentLine;
         private int _currentColumn;
         private bool _isEof;
@@ -24,7 +23,6 @@ namespace PascalCompiler.IO
             _reader = new StreamReader(filePath);
             _errorTable = errorTable ??
                 throw new ArgumentNullException(nameof(errorTable));
-            _errorGenerator = new RandomErrorGenerator();
 
             _currentLine = 1;
             _currentColumn = 0;
@@ -59,14 +57,10 @@ namespace PascalCompiler.IO
                 _currentColumn++;
             }
 
-            if (ch != '\r' && ch != '\n' &&
-                _errorGenerator.TryGetRandomError(out string rndMsg, 10))
-            {
-                _errorTable.AddError(_currentLine, _currentColumn, rndMsg);
-            }
-
             return ch;
         }
+
+        public void Close() { Dispose(); }
 
         public void Dispose()
         {
