@@ -4,6 +4,7 @@ using System.IO;
 using PascalCompiler.IO;
 using PascalCompiler.Lexer;
 using PascalCompiler.Syntax;
+using PascalCompiler.Semantics;
 
 namespace PascalCompiler
 {
@@ -16,8 +17,7 @@ namespace PascalCompiler
 
             if (!File.Exists(file1))
             {
-                string msg = $"Ошибка: Файл '{file1}' не найден!";
-                Console.WriteLine(msg);
+                Console.WriteLine($"Ошибка: Файл '{file1}' не найден!");
                 Console.ReadLine();
                 return;
             }
@@ -25,15 +25,14 @@ namespace PascalCompiler
             string code = File.ReadAllText(file1);
             string[] sourceLines = File.ReadAllLines(file1);
 
-            Console.WriteLine("Исходный код");
+            Console.WriteLine("Исходный код\n");
             Console.WriteLine(code);
             Console.WriteLine("\n");
 
             ErrorTable lexErrors = new ErrorTable();
             List<int> outputCodes = new List<int>();
 
-            using (InputOutputModule io = new InputOutputModule(file1,
-                lexErrors))
+            using (InputOutputModule io = new InputOutputModule(file1, lexErrors))
             {
                 LexicalAnalyzer lexer = new LexicalAnalyzer(io, lexErrors);
                 Token token = lexer.GetNextToken();
@@ -49,18 +48,17 @@ namespace PascalCompiler
             string file2Content = string.Join(" ", outputCodes);
             File.WriteAllText(file2, file2Content);
 
-            Console.WriteLine("\nФайл 2: ");
-            Console.WriteLine(file2Content);
-
-            Console.WriteLine("\nАнализ: ");
+            Console.WriteLine("Анализ Ошибок:");
 
             ErrorTable allErrors = new ErrorTable();
+            SemanticAnalyzer semantic = new SemanticAnalyzer(allErrors);
 
-            using (InputOutputModule io = new InputOutputModule(file1,
-                allErrors))
+            using (InputOutputModule io = new InputOutputModule(file1, allErrors))
             {
                 LexicalAnalyzer lexer = new LexicalAnalyzer(io, allErrors);
-                Parser parser = new Parser(lexer, allErrors);
+
+                Parser parser = new Parser(lexer, allErrors, semantic);
+
                 parser.ParseProgram();
             }
 

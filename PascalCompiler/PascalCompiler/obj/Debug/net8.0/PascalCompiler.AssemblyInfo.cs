@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PascalCompiler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a44b2cfeeb83424dea8fc99369b6f73b2d9bdd76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+872a4aab317fa74df4ab1a1b5de88553cf5219d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("PascalCompiler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PascalCompiler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

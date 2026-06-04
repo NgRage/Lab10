@@ -7,24 +7,36 @@
       "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\tokentype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\tokentype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\semanticanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\semanticanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\typeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\typeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\lexicalanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\lexicalanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\pascaltype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\pascaltype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\tokentype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\tokentype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\errortable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\errortable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\lexicalanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|solutionrelative:pascalcompiler\\lexicalanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D8313BC-F7DD-4A7F-AF3B-EF18A22C5D50}|PascalCompiler\\PascalCompiler.csproj|c:\\users\\rage\\desktop\\\u044F\u043F\\lab 10\\lab10\\pascalcompiler\\pascalcompiler\\errorinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,8 +54,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SemanticAnalyzer.cs",
+              "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\SemanticAnalyzer.cs",
+              "RelativeDocumentMoniker": "PascalCompiler\\SemanticAnalyzer.cs",
+              "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\SemanticAnalyzer.cs",
+              "RelativeToolTip": "PascalCompiler\\SemanticAnalyzer.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowE4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-04T15:00:19.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TypeInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\TypeInfo.cs",
+              "RelativeDocumentMoniker": "PascalCompiler\\TypeInfo.cs",
+              "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\TypeInfo.cs",
+              "RelativeToolTip": "PascalCompiler\\TypeInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-04T14:19:51.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PascalType.cs",
+              "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\PascalType.cs",
+              "RelativeDocumentMoniker": "PascalCompiler\\PascalType.cs",
+              "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\PascalType.cs",
+              "RelativeToolTip": "PascalCompiler\\PascalType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-04T14:17:36.38Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -52,7 +102,7 @@
               "RelativeDocumentMoniker": "PascalCompiler\\Parser.cs",
               "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\Parser.cs",
               "RelativeToolTip": "PascalCompiler\\Parser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAtwEIAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-31T10:21:29.836Z",
               "EditorCaption": ""
@@ -65,13 +115,14 @@
               "RelativeDocumentMoniker": "PascalCompiler\\LexicalAnalyzer.cs",
               "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\LexicalAnalyzer.cs",
               "RelativeToolTip": "PascalCompiler\\LexicalAnalyzer.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAADwvzgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALgAAAAAAAAAAAAcwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T10:12:46.405Z"
+              "WhenOpened": "2026-05-28T10:12:46.405Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Token.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\Token.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\Token.cs",
@@ -79,25 +130,24 @@
               "RelativeToolTip": "PascalCompiler\\Token.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T10:11:11.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-28T10:11:11.823Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "TokenType.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\TokenType.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\TokenType.cs",
               "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\TokenType.cs",
               "RelativeToolTip": "PascalCompiler\\TokenType.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwDsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAswD4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-28T10:10:37.022Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "ErrorTable.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\ErrorTable.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\ErrorTable.cs",
@@ -105,12 +155,11 @@
               "RelativeToolTip": "PascalCompiler\\ErrorTable.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAowCwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T11:42:20.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T11:42:20.756Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "InputOutputModel.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\InputOutputModel.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\InputOutputModel.cs",
@@ -122,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "ErrorInfo.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\ErrorInfo.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\ErrorInfo.cs",
@@ -134,13 +183,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\Program.cs",
               "RelativeDocumentMoniker": "PascalCompiler\\Program.cs",
               "ToolTip": "C:\\Users\\Rage\\Desktop\\\u042F\u041F\\lab 10\\Lab10\\PascalCompiler\\PascalCompiler\\Program.cs",
               "RelativeToolTip": "PascalCompiler\\Program.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T11:07:29.079Z",
               "EditorCaption": ""

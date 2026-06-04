@@ -1,6 +1,7 @@
 ﻿using System;
 using PascalCompiler.IO;
 using PascalCompiler.Lexer;
+using PascalCompiler.Semantics;
 
 namespace PascalCompiler.Syntax
 {
@@ -8,14 +9,16 @@ namespace PascalCompiler.Syntax
     {
         private readonly LexicalAnalyzer _lexer;
         private readonly ErrorTable _errorTable;
+        private readonly SemanticAnalyzer _semantic;
         private Token _currentToken;
 
-        public Parser(LexicalAnalyzer lexer, ErrorTable errorTable)
+        public Parser(LexicalAnalyzer lexer, ErrorTable errorTable, SemanticAnalyzer semantic)
         {
             _lexer = lexer ??
                 throw new ArgumentNullException(nameof(lexer));
             _errorTable = errorTable ??
                 throw new ArgumentNullException(nameof(errorTable));
+            _semantic = semantic;
 
             Advance();
         }
@@ -52,7 +55,7 @@ namespace PascalCompiler.Syntax
                 string msg = $"Ожидалось '{expected}', " +
                              $"но встречено '{_currentToken.Value}'";
                 ReportError(msg);
-                Recover(); 
+                Recover();
             }
         }
 
@@ -74,23 +77,56 @@ namespace PascalCompiler.Syntax
             Match(TokenType.Period);
         }
 
+        private PascalType DeterminePascalType(TokenType type)
+        {
+            switch (type)
+            {
+                case TokenType.Integer: return PascalType.Integer;
+                case TokenType.Real: return PascalType.Real;
+                case TokenType.String: return PascalType.String;
+                case TokenType.Boolean: return PascalType.Boolean;
+                case TokenType.Char: return PascalType.Char;
+                case TokenType.Record: return PascalType.Record;
+                default: return PascalType.Unknown;
+            }
+        }
+
         private void ParseVarDeclarations()
         {
             Match(TokenType.Var);
+
             while (_currentToken.Type == TokenType.Identifier)
             {
-                Advance(); 
+                List<Token> idTokens = new List<Token>();
+                idTokens.Add(_currentToken);
+                Match(TokenType.Identifier);
+
+                while (_currentToken.Type == TokenType.Comma)
+                {
+                    Match(TokenType.Comma);
+                    idTokens.Add(_currentToken);
+                    Match(TokenType.Identifier);
+                }
+
                 Match(TokenType.Colon);
 
+                TypeInfo declaredType;
                 if (_currentToken.Type == TokenType.Record)
                 {
-                    ParseRecordType();
+                    declaredType = ParseRecordType();
                 }
                 else
                 {
+                    PascalType baseType = DeterminePascalType(_currentToken.Type);
                     ParseStandardType();
+                    declaredType = new TypeInfo(baseType);
                 }
+
                 Match(TokenType.Semicolon);
+                foreach (var token in idTokens)
+                {
+                    _semantic.DeclareVariable(token.Value, declaredType, token.Line, token.Column);
+                }
             }
         }
 
@@ -110,17 +146,48 @@ namespace PascalCompiler.Syntax
             }
         }
 
-        private void ParseRecordType()
+        private TypeInfo ParseRecordType()
         {
             Match(TokenType.Record);
+            TypeInfo recordType = new TypeInfo(PascalType.Record);
+
             while (_currentToken.Type == TokenType.Identifier)
             {
-                Advance();
+                List<Token> fieldTokens = new List<Token>();
+                fieldTokens.Add(_currentToken);
+                Match(TokenType.Identifier);
+
+                while (_currentToken.Type == TokenType.Comma)
+                {
+                    Match(TokenType.Comma);
+                    fieldTokens.Add(_currentToken);
+                    Match(TokenType.Identifier);
+                }
+
                 Match(TokenType.Colon);
+                PascalType fieldBaseType = DeterminePascalType(_currentToken.Type);
                 ParseStandardType();
                 Match(TokenType.Semicolon);
+
+                TypeInfo fieldType = new TypeInfo(fieldBaseType);
+
+                foreach (var fToken in fieldTokens)
+                {
+                    if (recordType.RecordFields.ContainsKey(fToken.Value))
+                    {
+                        _errorTable.AddError(fToken.Line, fToken.Column,
+                            $"Семантика: Дублирование поля '{fToken.Value}'" +
+                            $" внутри record.");
+                    }
+                    else
+                    {
+                        recordType.RecordFields[fToken.Value] = fieldType;
+                    }
+                }
             }
+
             Match(TokenType.End);
+            return recordType;
         }
 
         private void ParseCompoundStatement()
@@ -160,76 +227,167 @@ namespace PascalCompiler.Syntax
             }
         }
 
-        private void ParseVariableAccess()
+        private TypeInfo ParseVariableAccess()
         {
+            Token idToken = _currentToken;
             Match(TokenType.Identifier);
-            
-            if (_currentToken.Type == TokenType.Period)
+
+            TypeInfo currentType = _semantic.GetVariableType(idToken.Value, idToken.Line, idToken.Column);
+
+            while (_currentToken.Type == TokenType.Period)
             {
-                Advance();
+                Match(TokenType.Period);
+                Token fieldToken = _currentToken;
                 Match(TokenType.Identifier);
+
+                if (currentType.BaseType == PascalType.Record)
+                {
+                    if (currentType.RecordFields.TryGetValue(fieldToken.Value, out TypeInfo fieldType))
+                    {
+                        currentType = fieldType;
+                    }
+                    else
+                    {
+                        _errorTable.AddError(fieldToken.Line, fieldToken.Column,
+                            $"Поле '{fieldToken.Value}'" +
+                            $" не найдено в структуре record.");
+                        currentType = new TypeInfo(PascalType.Unknown);
+                    }
+                }
+                else
+                {
+                    if (currentType.BaseType != PascalType.Unknown)
+                    {
+                        _errorTable.AddError(fieldToken.Line, fieldToken.Column,
+                            $"Попытка обратиться через точку к переменной" +
+                            $" '{idToken.Value}', которая не является записью");
+                    }
+                    currentType = new TypeInfo(PascalType.Unknown);
+                }
             }
+
+            return currentType;
         }
 
         private void ParseAssignment()
         {
-            ParseVariableAccess();
+            Token startToken = _currentToken;
+            TypeInfo targetType = ParseVariableAccess();
+
             Match(TokenType.Assign);
-            ParseExpression();
+
+            TypeInfo valueType = ParseExpression();
+
+            _semantic.CheckAssignment(targetType, valueType, startToken.Line, startToken.Column);
         }
 
         private void ParseWithStatement()
         {
             Match(TokenType.With);
-            ParseVariableAccess();
+            Token recordToken = _currentToken;
+
+            TypeInfo recType = ParseVariableAccess();
+
             Match(TokenType.Do);
+
+            _semantic.EnterWithContext(recType, recordToken.Line, recordToken.Column);
+
             ParseStatement();
+
+            _semantic.ExitWithContext();
         }
 
-        private void ParseExpression()
+        private TypeInfo ParseExpression()
         {
-            ParseTerm();
-            while (_currentToken.Type == TokenType.Plus ||
-                   _currentToken.Type == TokenType.Minus)
+            TypeInfo type = ParseTerm();
+
+            while (_currentToken.Type == TokenType.Plus || _currentToken.Type == TokenType.Minus)
+            {
+                Token opToken = _currentToken;
+                Advance();
+                TypeInfo rightType = ParseTerm();
+
+                if (type.BaseType == PascalType.Unknown || rightType.BaseType == PascalType.Unknown)
+                {
+                    type = new TypeInfo(PascalType.Unknown);
+                }
+                else if (type.BaseType == PascalType.String || rightType.BaseType == PascalType.String)
+                {
+                    _errorTable.AddError(opToken.Line, opToken.Column, "Семантика: Арифметические операции не примемы к типу String.");
+                    type = new TypeInfo(PascalType.Unknown);
+                }
+
+                else if (type.BaseType == PascalType.Real || rightType.BaseType == PascalType.Real)
+                {
+                    type = new TypeInfo(PascalType.Real);
+                }
+                else
+                {
+                    type = new TypeInfo(PascalType.Integer);
+                }
+            }
+            return type;
+        }
+
+        private TypeInfo ParseTerm()
+        {
+            TypeInfo type = ParseFactor();
+
+            while (_currentToken.Type == TokenType.Multiply || _currentToken.Type == TokenType.Divide)
+            {
+                Token opToken = _currentToken;
+                Advance();
+                TypeInfo rightType = ParseFactor();
+
+                if (type.BaseType == PascalType.Unknown || rightType.BaseType == PascalType.Unknown)
+                {
+                    type = new TypeInfo(PascalType.Unknown);
+                }
+
+                else if (opToken.Type == TokenType.Divide || type.BaseType == PascalType.Real || rightType.BaseType == PascalType.Real)
+                {
+                    type = new TypeInfo(PascalType.Real);
+                }
+                else
+                {
+                    type = new TypeInfo(PascalType.Integer);
+                }
+            }
+            return type;
+        }
+
+        private TypeInfo ParseFactor()
+        {
+
+            if (_currentToken.Type == TokenType.Number)
+            {
+                PascalType numType = _currentToken.Value.Contains(".") ? PascalType.Real : PascalType.Integer;
+                Advance();
+                return new TypeInfo(numType);
+            }
+
+            if (_currentToken.Type == TokenType.StringLiteral)
             {
                 Advance();
-                ParseTerm();
+                return new TypeInfo(PascalType.String);
             }
-        }
 
-        private void ParseTerm()
-        {
-            ParseFactor();
-            while (_currentToken.Type == TokenType.Multiply ||
-                   _currentToken.Type == TokenType.Divide)
-            {
-                Advance();
-                ParseFactor();
-            }
-        }
-
-        private void ParseFactor()
-        {
             if (_currentToken.Type == TokenType.Identifier)
             {
-                ParseVariableAccess();
+                return ParseVariableAccess();
             }
-            else if (_currentToken.Type == TokenType.Number ||
-                     _currentToken.Type == TokenType.StringLiteral)
+
+            if (_currentToken.Type == TokenType.LeftParen)
             {
-                Advance();
-            }
-            else if (_currentToken.Type == TokenType.LeftParen)
-            {
-                Advance();
-                ParseExpression();
+                Match(TokenType.LeftParen);
+                TypeInfo type = ParseExpression();
                 Match(TokenType.RightParen);
+                return type;
             }
-            else
-            {
-                ReportError("Ожидался идентификатор, число или '('");
-                Recover();
-            }
+
+            ReportError("Ожидался идентификатор, число или '('");
+            Recover();
+            return new TypeInfo(PascalType.Unknown);
         }
     }
 }
